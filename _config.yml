@@ -78,5 +78,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://faraway96:a2507447596@github.com/faraway96/faraway96.github.io.git
-  branch: master
+  repo: 
+    github: git@github.com:faraway96/faraway96.github.io.git,master
