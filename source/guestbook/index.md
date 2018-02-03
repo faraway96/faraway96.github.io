@@ -5,7 +5,6 @@ type: guestbook
 
 <blockquote class="blockquote-center">人生不只有眼前的苟且,还有诗和远方</blockquote>
 
-<br/>
-> 最近访客
-
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+<div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzg0Ni8xMDM5OQ=="></div>
+</div>
