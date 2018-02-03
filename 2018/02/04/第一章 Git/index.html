@@ -110,10 +110,12 @@
 <meta property="og:site_name" content="诗和远方">
 <meta property="og:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-03T18:49:19.404Z">
+<meta property="og:image" content="http://yoursite.com/img/codebase1-1.jpg">
+<meta property="og:updated_time" content="2018-02-03T19:07:20.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一章 Git">
 <meta name="twitter:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
+<meta name="twitter:image" content="http://yoursite.com/img/codebase1-1.jpg">
 
 
 
@@ -378,11 +380,19 @@
 </code></pre><p>　　Git会在本地创建代码库的特性，确实给开发者带来了好处：</p>
 <pre><code>-  当没有网络时,Git依然可以进行提交操作,并有完整提交记录，不必担心工作过程丢失，而svn在没有网络时虽然也可以在本地工作,但是这就像写word文档而无法保存一样危险。
 </code></pre><p><br>　　关于Git与SVN其他的不同点就不多说了，大家可以参考<a href="http://blog.csdn.net/hellow__world/article/details/72529022" target="_blank" rel="noopener">解读Git与SVN的区别</a>。</p>
-<h2 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h2><h3 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a>Git的安装</h3><p>　　本章是基于Windows系统，需要在其他系统安装请参考<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="noopener">这里</a>。<br>　　<br>　　首先你可以试着输入<code>git</code>，看当前系统有没有安装。<br>　　如果没有安装，可以从Git官网直接<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装程序</a>，（网速慢的同学请移步<a href="https://pan.baidu.com/s/1kU5OCOB#list/path=/pub/git" target="_blank" rel="noopener">国内镜像</a>），然后按默认选项安装即可。<br>　　安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，弹出一个类似命令行窗口的东西，就说明Git安装成功！<br>　　<br>　　首先创建一个名为<code>test</code>的目录，然后在命令行中进入到该目录下。<br><br>　　范例1：创建本地版本库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></p>
-<pre><code>语句解释：
--  在命令中执行上面的命令就可以创建一个空的版本库。
--  命令执行之后，test目录下会出现一个名为.git的隐藏目录，里面保存着各类信息，请不要手工修改其内的任何文件。
-</code></pre><p><br>　　然后再创建一个<code>a.txt</code>，并将<code>66666</code>写入到其内。<br><br>　　范例2：查看本地版本库状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cutler@cutler-OptiPlex-7040:~/workspace/test$ git status</span><br><span class="line">位于分支 master</span><br><span class="line"></span><br><span class="line">初始提交</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;file&gt;...&quot; 以包含要提交的内容）</span><br><span class="line"></span><br><span class="line">	a.txt</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure></p>
+<h2 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h2><h3 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a>Git的安装</h3><p>　　本章是基于Windows系统，需要在其他系统安装请参考<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="noopener">这里</a>。<br>　　<br>　　首先你可以试着输入<code>git</code>，看当前系统有没有安装。<br>　　如果没有安装，可以从Git官网直接<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装程序</a>，（网速慢的同学请移步<a href="https://pan.baidu.com/s/1kU5OCOB#list/path=/pub/git" target="_blank" rel="noopener">国内镜像</a>），然后按默认选项安装即可。<br>　　安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，弹出一个类似命令行窗口的东西，就说明Git安装成功！<br>　　<img src="/img/codebase1-1.jpg" alt="Git bash"><br>　　安装完成，还需要最后一步设置，在命令行输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>注意<code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+<h3 id="Git基本操作范例"><a href="#Git基本操作范例" class="headerlink" title="Git基本操作范例"></a>Git基本操作范例</h3><p>　　首先创建一个名为<code>test</code>的目录，然后在命令行中进入到该目录下。<br><br>　　范例1：创建本地版本库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>  语句解释：</p>
+<ul>
+<li>在命令中执行上面的命令就可以创建一个空的版本库。</li>
+<li>命令执行之后，test目录下会出现一个名为.git的隐藏目录，里面保存着各类信息，请不要手工修改其内的任何文件。</li>
+</ul>
+</li>
+</ul>
+<p><br>　　然后再创建一个<code>a.txt</code>，并将<code>66666</code>写入到其内。<br><br>　　范例2：查看本地版本库状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cutler@cutler-OptiPlex-7040:~/workspace/test$ git status</span><br><span class="line">位于分支 master</span><br><span class="line"></span><br><span class="line">初始提交</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;file&gt;...&quot; 以包含要提交的内容）</span><br><span class="line"></span><br><span class="line">	a.txt</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure></p>
 <pre><code>语句解释：
 -  “未跟踪的文件”是指未被纳入到版本控制中，也就是说如果我们此时执行提交命令，是不会将a.txt添加到版本库中的。
 </code></pre><p><br>　　范例3：提交代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit</span><br></pre></td></tr></table></figure></p>
@@ -694,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与SVN"><span class="nav-number">1.1.</span> <span class="nav-text">Git与SVN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与SVN"><span class="nav-number">1.1.</span> <span class="nav-text">Git与SVN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git基本操作范例"><span class="nav-number">2.2.</span> <span class="nav-text">Git基本操作范例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
             
 
           </div>
