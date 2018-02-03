@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="诗和远方">
 <meta property="og:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-03T18:47:32.822Z">
+<meta property="og:updated_time" content="2018-02-03T18:49:19.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一章 Git">
 <meta name="twitter:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
@@ -372,7 +372,7 @@
       
         <p>　　最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。<br><a id="more"></a></p>
 <h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>　　最初Git 是 Linus Torvalds(<code>Linux的开发者</code>) 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>　　<br>　　它采用了分布式版本库的方式，对服务器端软件依赖较小，每个人的电脑都是一个Git版本仓库，使源代码的发布和交流极其方便。 Git 的速度很快，这对于诸如 Linux kernel 这样的大项目来说很重要。 Git 最为出色的是它的合并跟踪能力。<br>　　<br>　　对于Git的出现这里有个故事，大家有兴趣的可以看一下<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137402760310626208b4f695940a49e5348b689d095fc000" target="_blank" rel="noopener">Git的由来</a>。</p>
-<p>###Git与SVN<br>　　由于SVN等工具出现的年头很长了，包括笔者在工作中使用的一直都是SVN，我么这里就简单聊一下Git与SVN的一些差异。<br>　　核心不同点：</p>
+<h3 id="Git与SVN"><a href="#Git与SVN" class="headerlink" title="Git与SVN"></a>Git与SVN</h3><p>　　由于SVN等工具出现的年头很长了，包括笔者在工作中使用的一直都是SVN，我么这里就简单聊一下Git与SVN的一些差异。<br>　　核心不同点：</p>
 <pre><code>-  SVN是集中式的，各个客户端共同维护一个代码库，开发时需要联网才能提交代码到代码库。
 -  Git是分布式的，各个客户端虽然仍然是共同维护一个代码库，但是每个客户端在下载代码时，会同时在本地建立代码库副本，就算开发者没有网络，开发者也可以肆无忌惮的工作，在处于重要的工作节点时可以对本地的代码库进行add、commit等操作。
 </code></pre><p>　　Git会在本地创建代码库的特性，确实给开发者带来了好处：</p>
@@ -694,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与SVN"><span class="nav-number">1.1.</span> <span class="nav-text">Git与SVN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
             
 
           </div>
