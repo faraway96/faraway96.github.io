@@ -111,7 +111,7 @@
 <meta property="og:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/codebase1-1.jpg">
-<meta property="og:updated_time" content="2018-02-04T07:09:29.482Z">
+<meta property="og:updated_time" content="2018-02-04T07:15:27.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一章 Git">
 <meta name="twitter:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
@@ -442,7 +442,7 @@
 -  使用“git reset HEAD 文件名”就可以将该文件撤出缓存区。
 </code></pre><h4 id="恢复文件到初始状态"><a href="#恢复文件到初始状态" class="headerlink" title="恢复文件到初始状态"></a>恢复文件到初始状态</h4><p>　　还有一种情况，我们在一个类中写了半天的代码，最后发现写了还不如不写，但是由于写的太多了，使用ctrl+z已经没法将文件退回到最初的状态了，此时我们同样有方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- test1.txt</span><br></pre></td></tr></table></figure></p>
 <pre><code>语句解释：
--  需要注意的是--和a.txt之间是有空格存在的。
+-  需要注意的是--和test1.txt之间是有空格存在的。
 
 -  checkout命令可以使本地文件回退，不过这其中有几点需要注意的地方。
     -  我们修改文件之后，如果将文件已经添加到了暂存区，那么进行checkout操作只会将本地文件重置为暂存区中的文件。
