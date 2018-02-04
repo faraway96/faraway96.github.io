@@ -111,7 +111,7 @@
 <meta property="og:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/codebase1-1.jpg">
-<meta property="og:updated_time" content="2018-02-04T06:23:17.051Z">
+<meta property="og:updated_time" content="2018-02-04T07:09:29.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一章 Git">
 <meta name="twitter:description" content="最近一段时间笔者Git使用比较多，由于没有系统的学习，一直拿Git当做另一个SVN使用，正好趁着最近有时间完整的整理一下，同时加深印象。">
@@ -429,31 +429,26 @@
 -  从这个记录中我们可以看到版本库编号的前半部分（回滚时只要输入版本号的前缀git就可以知道要恢复到哪个版本上了）。
 -  也就是说，只需要执行“git reset --hard 78ab9b6”就能将内容还原到2222。
 -  Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向目标版本。
-</code></pre><p><br>　　是工作区和暂存区的概念，可以参考<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000" target="_blank" rel="noopener"> 这里 </a>，下面列出几条结论：</p>
-<pre><code>-  隐藏目录.git就是版本库，而.git目录所在的目录就被称为工作区。
--  版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
--  前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：
-   -  第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；
-   -  第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。
-   -  也就是说，若修改了文件的内容，但是并没有用add再次把该文件放入暂存区，那么当执行commit是不会提交该文件的。
--  因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以现在git commit就是往master分支上提交更改。
-</code></pre><p><br>　　总有时候我们把某个文件加入到缓存区之后就又后悔了，想把它撤出来。<br><br>　　范例10：撤出缓存区。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD a.txt</span><br></pre></td></tr></table></figure></p>
+</code></pre><h4 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h4><p>　　这里介绍一下工作区与暂存区的概念：</p>
+<pre><code>-  工作区：就是我们自己文件的所在目录，比如test1.txt的所在目录。
+
+-  暂存区：暂存区就是.git文件夹下的index（或者叫stage）,暂存区是git中很重要的一个概念，当我们对文件进行提交时有两步操作
+    -  第一步执行git add操作，add实际就是把文件添加到了暂存区。
+    -  第二步执行git commit操作就是将暂存区的文件提交到了当前分支。
+
+-  版本库：版本库就是.git文件夹，里面存了很多东西，其中重要的就是暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
+</code></pre><h4 id="撤出缓存区"><a href="#撤出缓存区" class="headerlink" title="撤出缓存区"></a>撤出缓存区</h4><p>　　总有时候我们把某个文件加入到缓存区之后就又后悔了，想把它撤出来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD test1.txt</span><br></pre></td></tr></table></figure></p>
 <pre><code>语句解释：
 -  使用“git reset HEAD 文件名”就可以将该文件撤出缓存区。
-</code></pre><p><br>　　还有一种情况，我们在一个类中写了半天的代码，最后发现写了还不如不写，但是由于写的太多了，使用ctrl+z已经没法将文件退回到最初的状态了，此时我们同样有方法。<br><br>　　范例11：恢复文件到初始状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- a.txt</span><br></pre></td></tr></table></figure></p>
+</code></pre><h4 id="恢复文件到初始状态"><a href="#恢复文件到初始状态" class="headerlink" title="恢复文件到初始状态"></a>恢复文件到初始状态</h4><p>　　还有一种情况，我们在一个类中写了半天的代码，最后发现写了还不如不写，但是由于写的太多了，使用ctrl+z已经没法将文件退回到最初的状态了，此时我们同样有方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- test1.txt</span><br></pre></td></tr></table></figure></p>
 <pre><code>语句解释：
--  在介绍checkout命令之前，我们需要知道，每当我们对a.txt修改之后，都需要再次将其add到暂存区才行。
-   -  比如a.txt最初的内容是111，我们将它修改为222，若想让a.txt被提交到版本库，必须得把它add到暂存区中才行。
-   -  若此时，我们再次将a.txt的内容修改为333，则仍然需要再add一次a.txt文件，否则提交的时候它的内容将是222。
--  而checkout命令就是把a.txt文件的最后一次修改给撤销。
-   -  若a.txt被修改了，但是没被加入到缓存区中，则会直接将它的内容还原。
-   -  若a.txt之前被修改了，同时当时也把它放入缓存区了，但是随后你又修改了a.txt文件，此时checkout命令只会将a.txt文件恢复到最近一次add到缓存区时的状态。
-   -  如果感觉我说的还是有歧义，那么请自行去测试。
 -  需要注意的是--和a.txt之间是有空格存在的。
-</code></pre><p><br>　　当我们不需要某个文件时，可以直接在目录中将它给删除，这个时候Git知道你删除了文件，因此工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了。<br>　　此时你有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且提交。<br>　　另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- a.txt</span><br></pre></td></tr></table></figure></p>
-<pre><code>语句解释：
--  也就是说，checkout不仅能撤销修改，也能撤销删除。
-</code></pre><h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>　　同样的，你需要先去看一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener"> 这里 </a>在继续向下看。</p>
+
+-  checkout命令可以使本地文件回退，不过这其中有几点需要注意的地方。
+    -  我们修改文件之后，如果将文件已经添加到了暂存区，那么进行checkout操作只会将本地文件重置为暂存区中的文件。
+    -  这个时候如果我们想重置为版本库中文件的话，就需要将文件先撤出暂存区再进行checkout操作。
+</code></pre><p><br>　　当我们不需要某个文件时，可以直接在目录中将它给删除，这个时候Git知道你删除了文件，因此工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了。<br>　　此时你有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且提交。<br>　　另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本。</p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>　　同样的，你需要先去看一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener"> 这里 </a>在继续向下看。</p>
 <p>　　这里简单的列一下仓库的常识：</p>
 <pre><code>-  在Git中也存在远程仓库的概念，各个员工可以把自己本地库中的代码push到远程仓库中去，以此来完成团队开发的目的。
 -  目前来说有两种类型的仓库：
@@ -701,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与SVN"><span class="nav-number">1.1.</span> <span class="nav-text">Git与SVN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git基本操作"><span class="nav-number">2.2.</span> <span class="nav-text">Git基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建本地版本库"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建本地版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看本地版本库状态"><span class="nav-number">2.2.2.</span> <span class="nav-text">查看本地版本库状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加到版本库"><span class="nav-number">2.2.3.</span> <span class="nav-text">添加到版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量添加到版本库"><span class="nav-number">2.2.4.</span> <span class="nav-text">批量添加到版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交代码"><span class="nav-number">2.2.5.</span> <span class="nav-text">提交代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较文件"><span class="nav-number">2.2.6.</span> <span class="nav-text">比较文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看提交记录"><span class="nav-number">2.2.7.</span> <span class="nav-text">查看提交记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销提交"><span class="nav-number">2.2.8.</span> <span class="nav-text">撤销提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看执行的操作历史"><span class="nav-number">2.2.9.</span> <span class="nav-text">查看执行的操作历史</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git介绍"><span class="nav-number">1.</span> <span class="nav-text">Git介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与SVN"><span class="nav-number">1.1.</span> <span class="nav-text">Git与SVN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础入门"><span class="nav-number">2.</span> <span class="nav-text">基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Git的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git基本操作"><span class="nav-number">2.2.</span> <span class="nav-text">Git基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建本地版本库"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建本地版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看本地版本库状态"><span class="nav-number">2.2.2.</span> <span class="nav-text">查看本地版本库状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加到版本库"><span class="nav-number">2.2.3.</span> <span class="nav-text">添加到版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量添加到版本库"><span class="nav-number">2.2.4.</span> <span class="nav-text">批量添加到版本库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交代码"><span class="nav-number">2.2.5.</span> <span class="nav-text">提交代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较文件"><span class="nav-number">2.2.6.</span> <span class="nav-text">比较文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看提交记录"><span class="nav-number">2.2.7.</span> <span class="nav-text">查看提交记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销提交"><span class="nav-number">2.2.8.</span> <span class="nav-text">撤销提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看执行的操作历史"><span class="nav-number">2.2.9.</span> <span class="nav-text">查看执行的操作历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">2.2.10.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#撤出缓存区"><span class="nav-number">2.2.11.</span> <span class="nav-text">撤出缓存区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#恢复文件到初始状态"><span class="nav-number">2.2.12.</span> <span class="nav-text">恢复文件到初始状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a></li></ol></div>
             
 
           </div>
