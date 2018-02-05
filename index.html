@@ -374,117 +374,20 @@
       
         
           
-            <p>本篇文章不是基础教程，只是笔者对java的一些简单理解，需要基础教程的可以移步<a href="http://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">教程</a></p>
-<h2 id="java介绍"><a href="#java介绍" class="headerlink" title="java介绍"></a>java介绍</h2><p> Java是一种广泛使用的计算机编程语言，拥有跨平台、面向对象、泛型编程的特性，广泛应用于企业级Web应用开发和移动应用开发。</p>
-<p>它有以下几个特点：</p>
-<ul>
-<li>java是一门高级语言，也就是更接近我们的自然语言。</li>
-<li>可移植性。它编写的程序需要运行在jvm虚拟机上，通过虚拟机的解析、编译、执行，我们才能达到控制计算机的目的。关于虚拟机我们后来会详细的说明。通过了在不同内核计算机上的jvm实现了java的可移植。</li>
-<li>面向对象，这是一种新的程序设计方式，与其向对应的就是c语言的面向过程。面向对象的典型操作就是将现实世界的物体，抽象成虚拟的模型，通过数据和行为进行数据之间的交互。</li>
-<li><p>自动的垃圾回收，java实现了一个自动的垃圾回收器，对于java中的大部分对象我们都不需要考虑它的销毁，回收器会为我们操作。</p>
-<pre><code>要点解析：
-    - 面向过程是一种程序设计方式，通过流程的控制达到要实现的效果，这种方式更多的是以计算机的思维看待程序设计，这种思考方式在进行大型系统设计时，往往会由于过于复杂，导致项目失败。
-    - 面向对象也是一种设计的方式，与面向过程的不同点是看问题的角度不同，面向对象更多的是以人的思维看待程序设计，将程序通过现实世界进行抽象，在Java中称为类，每个类都包含数据和行为两部分，类和类之间可以通过数据进行交互，就像在模拟现实的世界。这种方式可以设计出结构良好、易维护的系统。
-</code></pre></li>
-</ul>
-<h3 id="java的历史"><a href="#java的历史" class="headerlink" title="java的历史"></a>java的历史</h3><p>我们来看一下java发展的历程：</p>
-<pre><code>- 1995年5月23日，Java语言诞生
-- 1996年1月，第一个JDK-JDK1.0诞生
-- 1996年4月，10个最主要的操作系统供应商申明将在其产品中嵌入JAVA技术
-- 1996年9月，约8.3万个网页应用了JAVA技术来制作
-- 1997年2月18日，JDK1.1发布
-- 1997年4月2日，JavaOne会议召开，参与者逾一万人，创当时全球同类会议规模之纪录
-- 1997年9月，JavaDeveloperConnection社区成员超过十万
-- 1998年2月，JDK1.1被下载超过2,000,000次
-- 1998年12月8日，JAVA2企业平台J2EE发布
-- 1999年6月，SUN公司发布Java的三个版本：标准版（J2SE）、企业版（J2EE）和微型版（J2ME）
-- 2000年5月8日，JDK1.3发布
-- 2000年5月29日，JDK1.4发布
-- 2001年6月5日，NOKIA宣布，到2003年将出售1亿部支持Java的手机
-- 2001年9月24日，J2EE1.3发布
-- 2002年2月26日，J2SE1.4发布，自此Java的计算能力有了大幅提升
-- 2004年9月30日18:00PM，J2SE1.5发布，成为Java语言发展史上的又一里程碑。为了表示该版本的重要性，J2SE1.5更名为Java SE 5.0
-- 2005年6月，JavaOne大会召开，SUN公司公开Java SE 6。此时，Java的各种版本已经更名，以取消其中的数字“2”：J2EE更名为Java EE，J2SE更名为Java SE，J2ME更名为Java ME
-- 2006年12月，SUN公司发布JRE6.0
-- 2009年12月，SUN公司发布Java EE 6
-- 2010年11月，由于Oracle公司对于Java社区的不友善，因此Apache扬言将退出JCP[14]
-- 2011年7月28日，Oracle公司发布Java SE 7
-- 2014年3月18日，Oracle公司发表Java SE 8
-- 2017年9月21日，Oracle公司发表Java SE 9
-</code></pre><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>　　java中有八种基本类型，这八种基本类型是区别于对象之外的，包含：</p>
-<pre><code>byte：8位，最大存储数据量是255，存放的数据范围是-128~127之间。
-short：16位，最大数据存储量是65536，数据范围是-32768~32767之间。
-int：32位，最大数据存储容量是2的32次方减1，数据范围是负的2的31次 方到正的2的31次方减1。
-long：64位，最大数据存储容量是2的64次方减1，数据范围为负的2的63次方到正的2的63次方减1。
-float：32位，数据范围在3.4e-45~1.4e38，直接赋值时必须在数字后加上f或F。
-double：64位，数据范围在4.9e-324~1.8e308，赋值时可以加d或D也可以不加。
-boolean：只有true和false两个取值。
-char：16位，存储Unicode码，用单引号赋值。
-</code></pre><p>　　你应该很好奇，我们上面刚说完java的核心思想是面向对象编程，这里又提到了八个对象之外的基本类型。其实基本类型是java对于性能的妥协，想了解的童鞋可以参考<a href="http://www.importnew.com/11915.html" target="_blank" rel="noopener">拓展阅读</a></p>
-<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>　　八个包装类应了上面的八种基本类型，他们是基本类型的面向对象方式的实现，包含了一些常用的行为，如类型转换（parse），还有一些特性，如自动拆箱、装箱机制，这使基本类型和包装类之间可以相互转换。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">基本类型</th>
-<th style="text-align:center">包装类</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">Byte</td>
-</tr>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">Short</td>
-</tr>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">Character</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">Integer</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">Long</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">Float</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">Double</td>
-</tr>
-</tbody>
-</table>
-<h3 id="面向对象的四大特性"><a href="#面向对象的四大特性" class="headerlink" title="面向对象的四大特性"></a>面向对象的四大特性</h3><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>　　封装是一种尽可能隐藏程序实现细节的方法，可以防止类的内部数据和行为被外界无限制的访问。</p>
-<pre><code>下面是封装的一些优点：
- - 良好的封装能够减少耦合。
- - 类内部的结构可以自由修改。
- - 可以对成员变量进行更精确的控制。
- - 隐藏信息，实现细节。
-</code></pre><h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><p>　　抽象是指对现实物体的特征提取。对现实问题通过建模进行程序化。</p>
-<blockquote>
-<p>人们能解决的问题的复杂性直接取决于抽象的类型和质量       </p>
-</blockquote>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>　　类之间的继承关系用<code>extends</code>表示，其中中有两个概念，基类和导出类，导出类可以拥有基类中非私有化的数据和行为，在java中是单继承关系，也就是一个类只能存在一个基类，但是一个基类可以存在多个导出类。<br>　　导出类无法继承基类的构造器，如果基类中有带参数的构造器，可以在子类的构造器中通过<code>super()</code>关键字进行显式的调用，当基类拥有无参构造器，实例化导出类时系统会自动为你调用基类的无参构造器。<br>　　下面是一个简单的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.faraway.extend;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Art</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Art</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Art contructor"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Drawing</span> <span class="keyword">extends</span> <span class="title">Art</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Drawing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Drawing contructor"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cartoon</span> <span class="keyword">extends</span> <span class="title">Drawing</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Cartoon</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Cartoon contructor"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Cartoon c = <span class="keyword">new</span> Cartoon();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>执行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Art contructor</span><br><span class="line">Drawing contructor</span><br><span class="line">Drawing contructor</span><br></pre></td></tr></table></figure></p>
-<p>整理了一下结论：</p>
-<p>　　实例化导出类的时候同时要对从基类继承过来的变量进行初始化，所以会在导出类的构造方法被调用之前，默认调用基类无参的构造方法。有参数的构造方法就要在子类中显式的通过<code>super(XX)</code>来进行调用,当显式调用某个基类的有参构造方法时，就不会再调用对应基类的构造方法。</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>　　多态在java中一般是通过接口或者导出类重写基类的接口来实现，有下面几个特点：</p>
-<pre><code>- 使用父类（或接口）类型的引用指向子类的对象；
-- 该引用只能调用父类（或接口）中定义的方法和变量；
-- 如果子类中重写了父类（或接口）中的一个方法，那么在调用这个方法的时候，将会调用子类中的这个方法；
-- 变量不能被重写（覆盖），&quot;重写&quot;的概念只针对方法，如果在子类中&quot;重写&quot;了父类中的变量，那么在编译时会报错。
-</code></pre>
-          
+          本篇文章不是基础教程，只是笔者对java的一些简单理解，需要基础教程的可以移步教程
+java介绍 Java是一种广泛使用的计算机编程语言，拥有跨平台、面向对象、泛型编程的特性，广泛应用于企业级Web应用开发和移动应用开发。
+它有以下几个特点：
+
+java是一门高级语言，也就是更接近我们的自然语言。
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/05/第二章-Java/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
