@@ -327,6 +327,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编程基础/" itemprop="url" rel="index"><span itemprop="name">编程基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -403,7 +421,49 @@ double：64位，数据范围在4.9e-324~1.8e308，赋值时可以加d或D也可
 boolean：只有true和false两个取值。
 char：16位，存储Unicode码，用单引号赋值。
 </code></pre><p>　　你应该很好奇，我们上面刚说完java的核心思想是面向对象编程，这里又提到了八个对象之外的基本类型。其实基本类型是java对于性能的妥协，想了解的童鞋可以参考<a href="http://www.importnew.com/11915.html" target="_blank" rel="noopener">拓展阅读</a></p>
-<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>　　八个包装类应了上面的八种基本类型，他们是基本类型的面向对象方式的实现，包含了一些常用的行为，如类型转换（parse），还有一些特性，如自动拆箱、装箱机制，这使基本类型和包装类之间可以相互转换。<br>基本类型 | 包装类<br>:-: | :-:<br>byte | Byte<br>boolean | Boolean<br>short | Short<br>char | Character<br>int | Integer<br>long | Long<br>float | Float<br>double | Double</p>
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>　　八个包装类应了上面的八种基本类型，他们是基本类型的面向对象方式的实现，包含了一些常用的行为，如类型转换（parse），还有一些特性，如自动拆箱、装箱机制，这使基本类型和包装类之间可以相互转换。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">基本类型</th>
+<th style="text-align:center">包装类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">Byte</td>
+</tr>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">Short</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">Character</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">Integer</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">Long</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">Float</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">Double</td>
+</tr>
+</tbody>
+</table>
 <h3 id="面向对象的四大特性"><a href="#面向对象的四大特性" class="headerlink" title="面向对象的四大特性"></a>面向对象的四大特性</h3><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>　　封装是一种尽可能隐藏程序实现细节的方法，可以防止类的内部数据和行为被外界无限制的访问。</p>
 <pre><code>下面是封装的一些优点：
  - 良好的封装能够减少耦合。
@@ -669,19 +729,6 @@ char：16位，存储Unicode码，用单引号赋值。
                 </div>
               
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                    <span class="site-state-item-count">1</span>
-                    <span class="site-state-item-name">标签</span>
-                  
-                </div>
               
             </nav>
           
