@@ -111,7 +111,7 @@
 <meta property="og:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/codebase3-1.jpg">
-<meta property="og:updated_time" content="2018-02-07T15:01:06.277Z">
+<meta property="og:updated_time" content="2018-02-07T15:06:47.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三章 集合框架">
 <meta name="twitter:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
@@ -406,7 +406,7 @@ toArray() - 返回包含集合内所有对象的数组等
 - ArrayList(Collection&lt;? extends E&gt; c)  入参为集合类型的构造函数会先将c转换成一个数组，判断数组类型，如果不是Object数组会使用Array.copy方法进行复制。
 </code></pre><p>　　下面是ArrayList中的一些常用方法，简单说一下实现：</p>
 <pre><code>- add(E e)  首先E是一个泛型，也就是我们在实例化ArrayList的时候指定的数据类型，调用add方法之后会进行计算，当前内部数组的长度是否足够，如果足够就e添加到数组的最后，然后返回true。
-- add(int index, E element)  添加数据到指定位置，方法中的逻辑是，首先判断位置是否合理，校验内部数组长度是否足够，不够的话会进行扩展，然后调用[System.arraycopy(elementData, index, elementData, index + 1, size - index);][2]将从数组的指定位置的数据复制到指定位置，也就是从指定位置开始往后挪一位，最后将element添加到指定位置。因为System.arraycopy是直接操作的内存块，所以速度很快。
+- add(int index, E element)  添加数据到指定位置，方法中的逻辑是，首先判断位置是否合理，校验内部数组长度是否足够，不够的话会进行扩展，然后调用System.arraycopy(elementData, index, elementData, index + 1, size - index);将从数组的指定位置的数据复制到指定位置，也就是从指定位置开始往后挪一位，最后将element添加到指定位置。因为System.arraycopy是直接操作的内存块，所以速度很快。
 - addAll(Collection&lt;? extends E&gt; c)  添加另一个集合的所有数据到当前集合，首先将c集合转换为Object数组，然后使用System.arraycopy将数组复制到内部数组的指定位置。
 - get(int index)  很简单，直接获取内部数组指定位置的数据。
 - indexOf(Object o)  返回o在内部数组中的位置，因为ArrayList是包含重复数据的，所以只会返回第一个相同数据的所在位置，内部实现是通过for循环遍历。
@@ -414,7 +414,10 @@ toArray() - 返回包含集合内所有对象的数组等
 - contains(Object o)  是否包含指定数据，内部调用了indexOf方法，判断返回值是否&gt;=0。
 - toArray()  返回一个内部数组的复制。和原数组不是同一个引用。
 - E remove(int index)  移除数组中指定位置的数据，并返回对应的数据。实现也是通过System.arraycopy的复制。
-</code></pre><h4 id="LinkList"><a href="#LinkList" class="headerlink" title="LinkList"></a>LinkList</h4><p>　　挖坑，后面补充</p>
+</code></pre><p><strong>本节拓展</strong></p>
+<ul>
+<li><a href="http://blog.csdn.net/fangchengimz/article/details/50537306" target="_blank" rel="noopener">System.arraycopy</a><h4 id="LinkList"><a href="#LinkList" class="headerlink" title="LinkList"></a>LinkList</h4>　　挖坑，后面补充</li>
+</ul>
 <h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>　　挖坑，后面补充</p>
 
       
