@@ -111,7 +111,7 @@
 <meta property="og:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/codebase3-1.jpg">
-<meta property="og:updated_time" content="2018-02-08T14:26:58.250Z">
+<meta property="og:updated_time" content="2018-02-08T15:42:48.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三章 集合框架">
 <meta name="twitter:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
@@ -432,7 +432,23 @@ toArray() - 返回包含集合内所有对象的数组等
 - set(int index, E element)  设置双向链表指定位置的数据为element，首先从first节点进行查找，找到指定位置的节点后修改Node.item的值。
 - remove(Object o)  移除数据为o的节点，首先从first节点进行查找，找到指定位置的节点后，修改上下节点的指向，然后将当前节点的item值修改为null。
 </code></pre><h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>　　实现方法基本同<code>ArrayList</code>,区别只是方法通过<code>synchronized</code>修饰，<code>synchronized</code>是一个同步锁，当多个线程访问相同方法时，会等待上一个访问结束之后才能继续。<br>　　所以<code>Vector</code>是线程安全的，缺点是访问速度比<code>ArrayList</code>要低。</p>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>　　挖坑，后面补充</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>　　<code>Set</code>接口继承自<code>Collection</code>，和Collection接口的方法相同，只是行为不一样。Set集合不能包含重复数据。<br>　　Set集合中的数据的特征是无序、可重复的且只能有一个为null的数据。</p>
+<h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><p>　　<code>HashSet</code>是<code>Set</code>接口的一个实现类，其内部原理是通过<code>HashMap</code>来存储数据。（对于HashMap请查看下面的章节）<br>　　<code>HashSet</code>提供4个外部使用的构造方法：</p>
+<pre><code>- HashSet()  初始化了一个空的HashMap
+- HashSet(int initialCapacity)  初始化了一个指定大小的HashMap
+- HashSet(int initialCapacity, float loadFactor) 初始化了一个指定大小和指定加载因子的HashMap。
+- HashSet(Collection&lt;? extends E&gt; c) 根据入参集合的大小计算内部HashMap的初始容量，然后for循环遍历，调用HashMap的put方法。
+</code></pre><p>　　HashSet的常用方法：</p>
+<pre><code>- add(E e)  调用了内部HashMap的put方法将e设置到HashMap的key上，value设置为空。
+- remove(Object o) 调用了内部HashMap的remove方法实现数据删除
+- contains(Object o) 调用了内部HashMap的containsKey方法。
+</code></pre><p><strong>本节拓展</strong></p>
+<ul>
+<li><a href="http://blog.csdn.net/tanggao1314/article/details/51457585" target="_blank" rel="noopener">Hash</a></li>
+<li><a href="https://www.cnblogs.com/hongdada/p/6024832.html" target="_blank" rel="noopener">加载因子</a></li>
+<li><a href="http://www.importnew.com/6931.html" target="_blank" rel="noopener">HashSet和HashMap的区别</a></li>
+</ul>
+<h4 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h4><h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>　　挖坑，后面补充</p>
 
       
     </div>
@@ -630,7 +646,7 @@ toArray() - 返回包含集合内所有对象的数组等
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是集合"><span class="nav-number">1.</span> <span class="nav-text">什么是集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合概况"><span class="nav-number">2.</span> <span class="nav-text">集合概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">3.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是集合"><span class="nav-number">1.</span> <span class="nav-text">什么是集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合概况"><span class="nav-number">2.</span> <span class="nav-text">集合概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">3.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">3.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">3.2.2.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">3.2.3.</span> <span class="nav-text">TreeSet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a></li></ol></div>
             
 
           </div>
