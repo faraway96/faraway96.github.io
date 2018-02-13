@@ -111,7 +111,7 @@
 <meta property="og:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/codebase3-1.jpg">
-<meta property="og:updated_time" content="2018-02-12T16:11:37.615Z">
+<meta property="og:updated_time" content="2018-02-13T13:33:01.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三章 集合框架">
 <meta name="twitter:description" content="集合是我们在开发中最常用到的工具，本章我们就来分析一下java里集合框架的设计，对集合框架了如指掌是我们的学习要求^_^。 什么是集合　　集合源自数学中的一个概念，代表了一个或多个确定的对象组成的整体，而这些对象就被称为集合中的元素。　　通俗来讲，集合就是一个用来存放数据的容器，java中集合是用来存放一系列的java对象而设计的一个类库，这个类库在java.util包下，根据不同的用途或者作">
@@ -462,7 +462,27 @@ toArray() - 返回包含集合内所有对象的数组等
 <h4 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h4><p>　　Deque是Queue接口的一个拓展，属于双端队列，它支持从两个端点方向检索和插入元素,因此Deque既可以支持LIFO形式也可以支持LIFO形式.Deque接口是一种比Stack和Vector更为丰富的抽象数据形式,因为它同时实现了以上两者。</p>
 <h5 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h5><p>　　基于数组实现的双端队列。</p>
 <h5 id="LinkedList-1"><a href="#LinkedList-1" class="headerlink" title="LinkedList"></a>LinkedList</h5><p>　　基于链表实现的双端队列。</p>
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>　　挖坑，后面补充</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>　　Map接口定义了一个键值对映射的集合，每个键对应了一个值，可以形成对象与对象之间的关联关系，Map也被称为映射表、关联数组、字典。</p>
+<pre><code>Map在接口中定义的主要方法包括：
+- void clear( )  从此映射中移除所有映射关系（可选操作）。
+- boolean containsKey(Object k)  如果此映射包含指定键的映射关系，则返回 true。
+- boolean containsValue(Object v)  如果此映射将一个或多个键映射到指定值，则返回 true。
+- Set entrySet( )  返回此映射中包含的映射关系的 Set 视图。
+- boolean equals(Object obj)  比较指定的对象与此映射是否相等。
+- Object get(Object k)  返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null。
+- int hashCode( )  返回此映射的哈希码值。
+- boolean isEmpty( )  如果此映射未包含键-值映射关系，则返回 true。
+- Set keySet( )  返回此映射中包含的键的 Set 视图。
+- Object put(Object k, Object v)  将指定的值与此映射中的指定键关联（可选操作）。
+- void putAll(Map m)  从指定映射中将所有映射关系复制到此映射中（可选操作）。
+- Object remove(Object k)  如果存在一个键的映射关系，则将其从此映射中移除（可选操作）。
+- int size( )  返回此映射中的键-值映射关系数。
+- Collection values( )  返回此映射中包含的值的 Collection 视图。
+</code></pre><p>　　<br>　　Map接口常用的实现类有HashMap、TreeMap和LinkedHashMap。</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>　　Map基于散列表的实现（它取代了Hashtable）。插入和查询键值对的开销是固定的。可以通过构造器设置容量和负载因子，以调整容器的性能。<br>　　HashMap内部维护了一个Node内部类，数据结构通过单向链表方式实现。</p>
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>　　类似于HashMap，但是迭代遍历它时，取得“键值对”的顺序是其插入次序，或者是最近最少使用（LRU）的次序。只比HashMap慢一点；而在迭代访问时反而更快，因为它使用链表维护内部次序。
+　　</p>
+<h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>　　基于红黑树的实现。查看“键”或“键值树”时，它们会被排序（次序由Comparable或Comparator决定）。TreeMap的特点在于，所得到的结果是经过排序的。TreeMap是唯一的带有subMap()方法的Map，它可以返回一个子树。</p>
 
       
     </div>
@@ -660,7 +680,7 @@ toArray() - 返回包含集合内所有对象的数组等
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是集合"><span class="nav-number">1.</span> <span class="nav-text">什么是集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合概况"><span class="nav-number">2.</span> <span class="nav-text">集合概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">3.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">3.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">3.2.2.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">3.2.3.</span> <span class="nav-text">TreeSet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deque"><span class="nav-number">3.3.1.</span> <span class="nav-text">Deque</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayDeque"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">ArrayDeque</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LinkedList-1"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">LinkedList</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是集合"><span class="nav-number">1.</span> <span class="nav-text">什么是集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合概况"><span class="nav-number">2.</span> <span class="nav-text">集合概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">3.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">3.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">3.2.2.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">3.2.3.</span> <span class="nav-text">TreeSet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deque"><span class="nav-number">3.3.1.</span> <span class="nav-text">Deque</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayDeque"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">ArrayDeque</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LinkedList-1"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">LinkedList</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">4.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">4.2.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeMap"><span class="nav-number">4.3.</span> <span class="nav-text">TreeMap</span></a></li></ol></li></ol></div>
             
 
           </div>
