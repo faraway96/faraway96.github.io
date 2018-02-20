@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.3" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+<meta name="description" content="本章主要写一下java中IO相关的知识，已便于整理和理解。 什么是IO 对语言设计人员来说，创建好的输入／输出系统是一项特别困难的任务。 ――《Think in Java》。  　　IO代表了Input和Output，为什么说它复杂呢，因为IO复杂点在于如何覆盖所有可能的因素，我们不仅仅要考虑文件、控制台、网络、内存等不同的种类，而且要处理大量的不同的读取方式，如：顺序读取、随机读取，二进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章-IO操作">
+<meta property="og:url" content="http://yoursite.com/2018/02/20/第四章-IO操作/index.html">
+<meta property="og:site_name" content="诗和远方">
+<meta property="og:description" content="本章主要写一下java中IO相关的知识，已便于整理和理解。 什么是IO 对语言设计人员来说，创建好的输入／输出系统是一项特别困难的任务。 ――《Think in Java》。  　　IO代表了Input和Output，为什么说它复杂呢，因为IO复杂点在于如何覆盖所有可能的因素，我们不仅仅要考虑文件、控制台、网络、内存等不同的种类，而且要处理大量的不同的读取方式，如：顺序读取、随机读取，二进">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/codebase4-1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/codebase4-2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/codebase4-3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/codebase4-4.jpg">
+<meta property="og:updated_time" content="2018-02-20T08:23:56.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四章-IO操作">
+<meta name="twitter:description" content="本章主要写一下java中IO相关的知识，已便于整理和理解。 什么是IO 对语言设计人员来说，创建好的输入／输出系统是一项特别困难的任务。 ――《Think in Java》。  　　IO代表了Input和Output，为什么说它复杂呢，因为IO复杂点在于如何覆盖所有可能的因素，我们不仅仅要考虑文件、控制台、网络、内存等不同的种类，而且要处理大量的不同的读取方式，如：顺序读取、随机读取，二进">
+<meta name="twitter:image" content="http://yoursite.com/img/codebase4-1.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/20/第四章-IO操作/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>第四章-IO操作 | 诗和远方</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e4362cb005b6b71b7091c472e5e8e354";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">诗和远方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />留言</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/第四章-IO操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faraway">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗和远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第四章-IO操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T16:23:01+08:00">2018-02-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　<br>　　本章主要写一下java中IO相关的知识，已便于整理和理解。</p>
+<h2 id="什么是IO"><a href="#什么是IO" class="headerlink" title="什么是IO"></a>什么是IO</h2><blockquote>
+<p>对语言设计人员来说，创建好的输入／输出系统是一项特别困难的任务。 ――《Think in Java》。</p>
+</blockquote>
+<p>　　<code>IO</code>代表了Input和Output，为什么说它复杂呢，因为<code>IO</code>复杂点在于如何覆盖所有可能的因素，我们不仅仅要考虑文件、控制台、网络、内存等不同的种类，而且要处理大量的不同的读取方式，如：顺序读取、随机读取，二进制读取、字符读取，按行读取、按字符读取……</p>
+<h3 id="java中的IO"><a href="#java中的IO" class="headerlink" title="java中的IO"></a>java中的IO</h3><p>　　当前Java中的IO包含两部分：<br>　　- java.io包中堵塞型IO<br>　　- java.nio包中的非堵塞型IO，通常称为New IO</p>
+<h2 id="java-io"><a href="#java-io" class="headerlink" title="java.io"></a>java.io</h2><p>　　Java的核心库<code>java.io</code>提供了全面的IO接口。包括：<code>文件读写</code>、<code>标准设备输入、输出</code>等。Java中IO是以流为基础进行输入输出的，所有数据被串行化写入输出流，或者从输入流读入。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><pre><code>- 流：流是一个很形象的概念，当程序需要读取数据的时候，就会开启一个通向数据源的流，这个数据源可以是文件，内存，或是网络连接。类似的，当程序需要写入数据的时候，就会开启一个通向目的地的流。这时候你就可以想象数据好像在这其中“流”动一样。
+- 阻塞式IO：所谓阻塞式IO流，就是指在从数据流当中读写数据的的时候，阻塞当前线程，直到IO流可以重新使用为止。
+</code></pre><p>　　java.io包中主要包含三部分</p>
+<ul>
+<li>流式部分 : IO的主体部分；</li>
+<li>非流式部分 : 主要包含一些辅助流式部分的类，如：File类、RandomAccessFile类和FileDescriptor等类</li>
+<li>其他类 : 文件读取部分的与安全相关的类，如：SerializablePermission类，以及与本地操作系统相关的文件系统的类，如：FileSystem类和Win32FileSystem类和WinNTFileSystem类</li>
+</ul>
+<p>　　我们可以从几方面对IO流进行分类：</p>
+<ul>
+<li>按照来源和去向可以分为：输入流和输出流</li>
+<li>按照处理数据类型的不同分为：字符流和字节流</li>
+<li>按数据对象分类：<ol>
+<li>文件</li>
+<li>字节数组</li>
+<li>字符串</li>
+<li>“管道”</li>
+<li>其他种类流组成的序列</li>
+<li>其他数据源</li>
+</ol>
+</li>
+</ul>
+<h3 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h3><h4 id="输入字节流"><a href="#输入字节流" class="headerlink" title="输入字节流"></a>输入字节流</h4><p><img src="/img/codebase4-1.jpg" alt="InputStream"></p>
+<p>　　<code>IO</code>中输入字节流的继承图可见上图，可以看出：</p>
+<pre><code>- InputStream是所有的输入字节流的父类，它是一个抽象类。
+- ByteArrayInputStream、StringBufferInputStream(上图的StreamBufferInputStream)、FileInputStream是三种基本的介质流，它们分别从Byte数组、StringBuffer、和本地文件中读取数据。
+- PipedInputStream是从与其它线程共用的管道中读取数据.
+- ObjectInputStream和所有FilterInputStream的子类都是装饰流（装饰器模式的主角）。
+</code></pre><p>　　InputStream中的三个基本的读方法</p>
+<pre><code>- abstract int read() ：读取一个字节数据，并返回读到的数据，如果返回-1，表示读到了输入流的末尾。
+- intread(byte[]?b) ：将数据读入一个字节数组，同时返回实际读取的字节数。如果返回-1，表示读到了输入流的末尾。
+- intread(byte[]?b, int?off, int?len) ：将数据读入一个字节数组，同时返回实际读取的字节数。如果返回-1，表示读到了输入流的末尾。off指定在数组b中存放数据的起始偏移位置；len指定读取的最大字节数。
+</code></pre><p>　　流结束的判断：方法read()的返回值为-1时；readLine()的返回值为null时。</p>
+<p>　　其它方法</p>
+<pre><code>- long skip(long?n)：在输入流中跳过n个字节，并返回实际跳过的字节数。
+- int available() ：返回在不发生阻塞的情况下，可读取的字节数。
+- void close() ：关闭输入流，释放和这个流相关的系统资源。
+- voidmark(int?readlimit) ：在输入流的当前位置放置一个标记，如果读取的字节数多于readlimit设置的值，则流忽略这个标记。
+- void reset() ：返回到上一个标记。
+- booleanmarkSupported() ：测试当前流是否支持mark和reset方法。如果支持，返回true，否则返回false。
+</code></pre><h4 id="输出字节流"><a href="#输出字节流" class="headerlink" title="输出字节流"></a>输出字节流</h4><p><img src="/img/codebase4-2.jpg" alt="OutputStream"></p>
+<p>　　<code>IO</code>中输出字节流的继承图可见上图，可以看出：</p>
+<pre><code>- OutputStream是所有的输出字节流的父类，它是一个抽象类。
+- ByteArrayOutputStream、FileOutputStream是两种基本的介质流，它们分别向Byte数组、和本地文件中写入数据。PipedOutputStream是向与其它线程共用的管道中写入数据。
+- ObjectOutputStream和所有FilterOutputStream的子类都是装饰流。
+</code></pre><p>　　OutputStream中的三个基本的写方法</p>
+<pre><code>- abstract void write(int?b)：往输出流中写入一个字节。
+- void write(byte[]?b) ：往输出流中写入数组b中的所有字节。
+- void write(byte[]?b, int?off, int?len) ：往输出流中写入数组b中从偏移量off开始的len个字节的数据。
+</code></pre><p>　　其它方法</p>
+<pre><code>- void flush() ：刷新输出流，强制缓冲区中的输出字节被写出。
+- void close() ：关闭输出流，释放和这个流相关的系统资源。
+</code></pre><h3 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h3><h4 id="字符输入流"><a href="#字符输入流" class="headerlink" title="字符输入流"></a>字符输入流</h4><p><img src="/img/codebase4-3.jpg" alt="Reader"><br>　　在上面的继承关系图中可以看出：</p>
+<pre><code>- Reader是所有的输入字符流的父类，它是一个抽象类。
+- CharReader、StringReader是两种基本的介质流，它们分别将Char数组、String中读取数据。PipedReader是从与其它线程共用的管道中读取数据。
+- BufferedReader很明显就是一个装饰器，它和其子类负责装饰其它Reader对象。
+- FilterReader是所有自定义具体装饰流的父类，其子类PushbackReader对Reader对象进行装饰，会增加一个行号。
+- InputStreamReader是一个连接字节流和字符流的桥梁，它将字节流转变为字符流。FileReader可以说是一个达到此功能、常用的工具类，在其源代码中明显使用了将FileInputStream转变为Reader的方法。我们可以从这个类中得到一定的技巧。Reader中各个类的用途和使用方法基本和InputStream中的类使用一致。后面会有Reader与InputStream的对应关系。
+</code></pre><p>　　主要方法：</p>
+<pre><code>- int read()  读取一个字符，返回值为读取的字符。
+- int read(char cbuf[])   读取一系列字符到数组cbuf[]中，返回值为实际读取的字符的数量。
+- abstract int read(char cbuf[],int off,int len)  读取len个字符，从数组cbuf[]的下标off处开始存放，返回值为实际读取的字符数量，该方法必须由子类实现。
+</code></pre><h4 id="字符输出流"><a href="#字符输出流" class="headerlink" title="字符输出流"></a>字符输出流</h4><p><img src="/img/codebase4-4.jpg" alt="Writer"><br>　　在上面的关系图中可以看出：</p>
+<pre><code>- Writer是所有的输出字符流的父类，它是一个抽象类。
+- CharArrayWriter、StringWriter是两种基本的介质流，它们分别向Char数组、String中写入数据。PipedWriter是向与其它线程共用的管道中写入数据
+- BufferedWriter是一个装饰器为Writer提供缓冲功能。
+- PrintWriter和PrintStream极其类似，功能和使用也非常相似。
+- OutputStreamWriter是OutputStream到Writer转换的桥梁，它的子类FileWriter其实就是一个实现此功能的具体类（具体可以研究一SourceCode）。功能和使用和OutputStream极其类似.
+</code></pre><p>　　主要方法：</p>
+<pre><code>- void write(int c)  将整型值c的低16位写入输出流 
+- void write(char cbuf[])  将字符数组cbuf[]写入输出流 
+- abstract void write(char cbuf[],int off,int len)  将字符数组cbuf[]中的从索引为off的位置处开始的len个字符写入输出流 
+- void write(String str)  将字符串str中的字符写入输出流 
+- void write(String str,int off,int len)  将字符串str 中从索引off开始处的len个字符写入输出流 
+</code></pre><h3 id="IO流使用选择"><a href="#IO流使用选择" class="headerlink" title="IO流使用选择"></a>IO流使用选择</h3><p>　　确定选用流对象的步骤</p>
+<pre><code>1. 确定原始数据的格式
+2. 确定是输入还是输出
+3. 是否需要转换流
+4. 数据的来源（去向）
+5. 是否需要缓冲
+6. 是否需要格式化输出
+</code></pre><p>　　按照数据格式选择</p>
+<pre><code>二进制格式（只要确定不是纯文本格式的），InputStream, OutputStream, 及其所有带Stream子类
+纯文本格式（比如英文/汉字/或其他编码文字）：Reader, Writer, 及其相关子类
+</code></pre><p>　　按照输入输出选择</p>
+<pre><code>输入：Reader， InputStream，及其相关子类
+输出：Writer，OutputStream，及其相关子类
+</code></pre><p>　　按照数据的来源（去向）选择</p>
+<pre><code>是文件：FileInputStream, FileOutputStream, FileReader, FileWriter
+是byte[]：ByteArrayInputStream, ByteArrayOutputStream
+是char[]：CharArrayReader, CharArrayWriter
+是String：StringBufferInputStream(已过时，因为其只能用于String的每个字符都是8位的字符串), StringReader, StringWriter
+是网络数据流：InputStream, OutputStream, Reader, Writer
+</code></pre><p>　　是否需要缓冲</p>
+<pre><code>要缓冲：BufferedInputStream, BufferedOuputStream, BuffereaReader, BufferedWriter
+</code></pre><p>　　是否需要格式化输出</p>
+<pre><code>需要格式化输出：PrintStream（输出字节），PrintWriter（输出字符）
+</code></pre><p>　　特殊需要</p>
+<pre><code>从Stream转化为Reader，Writer：InputStreamReader，OutputStreamWriter
+对象输入输出流：ObjectInputStream，ObjectOutputStream
+进程间通信：PipeInputStream，PipeOutputStream，PipeReader，PipeWriter
+合并输入：SequenceInputStream
+更特殊的需要：PushbackInputStream, PushbackReader, LineNumberInputStream, LineNumberReader
+</code></pre><p>　　</p>
+<h2 id="java-nio"><a href="#java-nio" class="headerlink" title="java.nio"></a>java.nio</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="faraway 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="faraway 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/06/第三章-集合框架/" rel="next" title="第三章 集合框架">
+                <i class="fa fa-chevron-left"></i> 第三章 集合框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzg0Ni8xMDM5OQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faraway" />
+            
+              <p class="site-author-name" itemprop="name">faraway</p>
+              <p class="site-description motion-element" itemprop="description">生活不只有眼前的苟且，还有诗和远方</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是IO"><span class="nav-number">1.</span> <span class="nav-text">什么是IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java中的IO"><span class="nav-number">1.1.</span> <span class="nav-text">java中的IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-io"><span class="nav-number">2.</span> <span class="nav-text">java.io</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字节流"><span class="nav-number">2.2.</span> <span class="nav-text">字节流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入字节流"><span class="nav-number">2.2.1.</span> <span class="nav-text">输入字节流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字节流"><span class="nav-number">2.2.2.</span> <span class="nav-text">输出字节流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符流"><span class="nav-number">2.3.</span> <span class="nav-text">字符流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输入流"><span class="nav-number">2.3.1.</span> <span class="nav-text">字符输入流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输出流"><span class="nav-number">2.3.2.</span> <span class="nav-text">字符输出流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO流使用选择"><span class="nav-number">2.4.</span> <span class="nav-text">IO流使用选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-nio"><span class="nav-number">3.</span> <span class="nav-text">java.nio</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faraway</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.3"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
