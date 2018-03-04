@@ -114,7 +114,8 @@
 <meta property="og:image" content="http://yoursite.com/img/codebase4-2.jpg">
 <meta property="og:image" content="http://yoursite.com/img/codebase4-3.jpg">
 <meta property="og:image" content="http://yoursite.com/img/codebase4-4.jpg">
-<meta property="og:updated_time" content="2018-02-20T09:04:08.065Z">
+<meta property="og:image" content="http://yoursite.com/img/codebase4-5.jpg">
+<meta property="og:updated_time" content="2018-03-04T12:32:06.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第四章 IO操作">
 <meta name="twitter:description" content="本章主要写一下java中IO相关的知识，已便于整理和理解。 什么是IO 对语言设计人员来说，创建好的输入／输出系统是一项特别困难的任务。  　　IO代表了Input和Output，为什么说它复杂呢，因为IO复杂点在于如何覆盖所有可能的因素，我们不仅仅要考虑文件、控制台、网络、内存等不同的种类，而且要处理大量的不同的读取方式，如：顺序读取、随机读取，二进制读取、字符读取，按行读取、按字符读取……">
@@ -485,8 +486,64 @@
 进程间通信：PipeInputStream，PipeOutputStream，PipeReader，PipeWriter
 合并输入：SequenceInputStream
 更特殊的需要：PushbackInputStream, PushbackReader, LineNumberInputStream, LineNumberReader
-</code></pre><p>　　</p>
-<p><strong>参考阅读</strong></p>
+</code></pre><h3 id="常用范例"><a href="#常用范例" class="headerlink" title="常用范例"></a>常用范例</h3><h2 id="java-nio"><a href="#java-nio" class="headerlink" title="java.nio"></a>java.nio</h2><p>　　<code>java.nio</code>全称java non-blocking IO，是指jdk1.4 及以上版本里提供的新api（New IO），为所有的原始类型（boolean类型除外）提供缓存支持的数据容器，使用它可以提供非阻塞式的高伸缩性网络。</p>
+<h3 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h3><p>　　<code>nio</code>的核心概念主要有三个：</p>
+<pre><code>- Channels : Channel是一个对象，可以通过它读取和写入数据。
+- Buffers : 是一个固定数据量的指定基本类型的数据容器。
+- Selectors : 选择器，Selector允许单线程处理多个 Channel。
+</code></pre><h3 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h3><p>　　Java NIO的通道类似流，但又有些不同：</p>
+<ul>
+<li>既可以从通道中读取数据，又可以写数据到通道。但流的读写通常是单向的。</li>
+<li>通道可以异步地读写。</li>
+<li>通道中的数据总是要先读到一个Buffer，或者总是要从一个Buffer中写入。</li>
+</ul>
+<h4 id="Channel的实现类"><a href="#Channel的实现类" class="headerlink" title="Channel的实现类"></a>Channel的实现类</h4><pre><code>- FileChannel ： 从文件中读写数据。
+- DatagramChannel ： 能通过UDP读写网络中的数据。
+- SocketChannel ： 能通过TCP读写网络中的数据。
+- ServerSocketChannel ： 可以监听新进来的TCP连接，像Web服务器那样。对每一个新进来的连接都会创建一个SocketChannel。
+</code></pre><h4 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h4><p>　　下面是一个使用FileChannel读取数据到Buffer中的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	RandomAccessFile raf = <span class="keyword">new</span> RandomAccessFile(<span class="string">"D:\\logs\\nio.txt"</span>, <span class="string">"rw"</span>);</span><br><span class="line">	FileChannel fc = raf.getChannel();</span><br><span class="line">	ByteBuffer buf = ByteBuffer.allocate((<span class="keyword">int</span>)fc.size());</span><br><span class="line">	<span class="keyword">int</span> bytesRead = fc.read(buf);</span><br><span class="line">	<span class="keyword">while</span> (bytesRead != -<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		buf.flip();</span><br><span class="line">           <span class="keyword">while</span>(buf.hasRemaining())</span><br><span class="line">           &#123;</span><br><span class="line">               System.out.print((<span class="keyword">char</span>)buf.get());</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           buf.compact();</span><br><span class="line">           bytesRead = fc.read(buf);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h3><p>　　缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO <code>Buffer</code>对象，并提供了一组方法，用来方便的访问该块内存。</p>
+<pre><code>Buffer的基本类型包括：
+- ByteBuffer
+- MappedByteBuffer
+- CharBuffer
+- DoubleBuffer
+- FloatBuffer
+- IntBuffer
+- LongBuffer
+- ShortBuffer
+</code></pre><h4 id="Buffer工作原理"><a href="#Buffer工作原理" class="headerlink" title="Buffer工作原理"></a>Buffer工作原理</h4><p><img src="/img/codebase4-5.jpg" alt="Buffer工作原理"></p>
+<p>　　想要理解<code>Buffer</code>需要先熟悉它的三个属性：</p>
+<ul>
+<li><code>capacity</code> ：<br>作为一个内存块，Buffer有一个固定的大小值，也叫“capacity”.你只能往里写capacity个byte、long，char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清除数据）才能继续写数据往里写数据。</li>
+<li><code>position</code><ul>
+<li>当你写数据到Buffer中时，position表示当前的位置。初始的position值为0.当一个byte、long等数据写到Buffer后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity</li>
+<li>当读取数据时，也是从某个特定位置读。当将Buffer从写模式切换到读模式，position会被重置为0，当从Buffer的position处读取数据时，position向前移动到下一个可读的位置。</li>
+</ul>
+</li>
+<li><code>limit</code><ul>
+<li>在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。</li>
+<li>当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Buffer的常用方法"><a href="#Buffer的常用方法" class="headerlink" title="Buffer的常用方法"></a>Buffer的常用方法</h4><pre><code>下面列举一些`Buffer`的常用方法：
+- allocate(int capacity)  该方法用来分配一个固定大小的缓冲区。
+- put()  put方法有很多版本，允许你以不同的方式把数据写入到Buffer中。
+- flip()  flip方法将Buffer从写模式切换到读模式。调用flip()方法会将position设回0，并将limit设置成之前position的值。换句话说，position现在用于标记读的位置，limit表示之前写进了多少个byte、char等 —— 现在能读取多少个byte、char等。
+- get()  get方法有很多版本，允许你以不同的方式从Buffer中读取数据。
+- rewind()  Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。
+- clear()  position将被设回0，limit被设置成 capacity的值。换句话说，Buffer 被清空了。Buffer中的数据并未清除，只是这些标记告诉我们可以从哪里开始往Buffer里写数据。如果Buffer中有一些未读的数据，调用clear()方法，数据将“被遗忘”，意味着不再有任何标记会告诉你哪些数据被读过，哪些还没有。
+- compact()  将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是不会覆盖未读的数据。
+- mark()与reset()  通过调用Buffer.mark()方法，可以标记Buffer中的一个特定position。之后可以通过调用Buffer.reset()方法恢复到这个position。
+- equals()  当满足下列条件时，表示两个Buffer相等：
+    - 有相同的类型（byte、char、int等）。
+    - Buffer中剩余的byte、char等的个数相等。
+    - Buffer中所有剩余的byte、char等都相同。
+- compareTo()  比较两个Buffer的剩余元素(byte、char等)， 如果满足下列条件，则认为一个Buffer“小于”另一个Buffer：
+    - 第一个不相等的元素小于另一个Buffer中对应的元素 。
+    - 所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。
+</code></pre><h3 id="nio和io的区别"><a href="#nio和io的区别" class="headerlink" title="nio和io的区别"></a>nio和io的区别</h3><p><strong>参考阅读</strong></p>
 <ul>
 <li><a href="http://blog.csdn.net/qq_25184739/article/details/51205186" target="_blank" rel="noopener">深入理解Java中的IO</a></li>
 <li><a href="https://www.cnblogs.com/penghuster/p/4869153.html" target="_blank" rel="noopener">java IO选择流的原则及其与IO流相关类的关系</a></li>
@@ -689,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是IO"><span class="nav-number">1.</span> <span class="nav-text">什么是IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java中的IO"><span class="nav-number">1.1.</span> <span class="nav-text">java中的IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-io"><span class="nav-number">2.</span> <span class="nav-text">java.io</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字节流"><span class="nav-number">2.2.</span> <span class="nav-text">字节流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入字节流"><span class="nav-number">2.2.1.</span> <span class="nav-text">输入字节流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字节流"><span class="nav-number">2.2.2.</span> <span class="nav-text">输出字节流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符流"><span class="nav-number">2.3.</span> <span class="nav-text">字符流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输入流"><span class="nav-number">2.3.1.</span> <span class="nav-text">字符输入流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输出流"><span class="nav-number">2.3.2.</span> <span class="nav-text">字符输出流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO流使用选择"><span class="nav-number">2.4.</span> <span class="nav-text">IO流使用选择</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是IO"><span class="nav-number">1.</span> <span class="nav-text">什么是IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java中的IO"><span class="nav-number">1.1.</span> <span class="nav-text">java中的IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-io"><span class="nav-number">2.</span> <span class="nav-text">java.io</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字节流"><span class="nav-number">2.2.</span> <span class="nav-text">字节流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入字节流"><span class="nav-number">2.2.1.</span> <span class="nav-text">输入字节流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字节流"><span class="nav-number">2.2.2.</span> <span class="nav-text">输出字节流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符流"><span class="nav-number">2.3.</span> <span class="nav-text">字符流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输入流"><span class="nav-number">2.3.1.</span> <span class="nav-text">字符输入流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符输出流"><span class="nav-number">2.3.2.</span> <span class="nav-text">字符输出流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO流使用选择"><span class="nav-number">2.4.</span> <span class="nav-text">IO流使用选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用范例"><span class="nav-number">2.5.</span> <span class="nav-text">常用范例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-nio"><span class="nav-number">3.</span> <span class="nav-text">java.nio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-1"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channels"><span class="nav-number">3.2.</span> <span class="nav-text">Channels</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Channel的实现类"><span class="nav-number">3.2.1.</span> <span class="nav-text">Channel的实现类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本示例"><span class="nav-number">3.2.2.</span> <span class="nav-text">基本示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer"><span class="nav-number">3.3.</span> <span class="nav-text">Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Buffer工作原理"><span class="nav-number">3.3.1.</span> <span class="nav-text">Buffer工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Buffer的常用方法"><span class="nav-number">3.3.2.</span> <span class="nav-text">Buffer的常用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nio和io的区别"><span class="nav-number">3.4.</span> <span class="nav-text">nio和io的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
