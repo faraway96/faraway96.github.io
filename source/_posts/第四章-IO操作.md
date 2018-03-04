@@ -257,17 +257,23 @@ categories: 编程基础
     - compareTo()  比较两个Buffer的剩余元素(byte、char等)， 如果满足下列条件，则认为一个Buffer“小于”另一个Buffer：
         - 第一个不相等的元素小于另一个Buffer中对应的元素 。
         - 所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。
+        
+### Selector ###
+　　Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，一个单独的线程可以管理多个channel，从而管理多个网络连接。
+　　详解可以参阅[Java NIO中的Selector和IO复用][6]
 ### nio和io的区别 ###
-
+　　详解可以参阅[Java NIO与IO][7]
 
 **参考阅读**
 - [深入理解Java中的IO](http://blog.csdn.net/qq_25184739/article/details/51205186)
 - [java IO选择流的原则及其与IO流相关类的关系](https://www.cnblogs.com/penghuster/p/4869153.html)
 - [HashSet和HashMap的区别](http://www.importnew.com/6931.html)
-
+- [并发编程网](http://ifeve.com/java-nio-all/)
 
   [1]: /img/codebase4-1.jpg
   [2]: /img/codebase4-2.jpg
   [3]: /img/codebase4-3.jpg
   [4]: /img/codebase4-4.jpg
   [5]: /img/codebase4-5.jpg
+  [6]: http://www.molotang.com/articles/906.html
+  [7]: http://ifeve.com/java-nio-vs-io/
