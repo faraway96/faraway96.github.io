@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.3" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+<meta name="description" content="在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。 第一节 基本概念WEB开发的相关知识　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章 JavaWeb概述">
+<meta property="og:url" content="http://yoursite.com/2018/10/02/第一章-javaweb概述/index.html">
+<meta property="og:site_name" content="诗和远方">
+<meta property="og:description" content="在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。 第一节 基本概念WEB开发的相关知识　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/javaweb/javaweb_base01.png">
+<meta property="og:updated_time" content="2018-10-02T07:19:54.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一章 JavaWeb概述">
+<meta name="twitter:description" content="在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。 第一节 基本概念WEB开发的相关知识　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了">
+<meta name="twitter:image" content="http://yoursite.com/img/javaweb/javaweb_base01.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/02/第一章-javaweb概述/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>第一章 JavaWeb概述 | 诗和远方</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e4362cb005b6b71b7091c472e5e8e354";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">诗和远方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />留言</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/02/第一章-javaweb概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="faraway">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗和远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第一章 JavaWeb概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-02T11:48:04+08:00">2018-10-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaWeb基础篇/" itemprop="url" rel="index"><span itemprop="name">JavaWeb基础篇</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。</p>
+<h2 id="第一节-基本概念"><a href="#第一节-基本概念" class="headerlink" title="第一节 基本概念"></a>第一节 基本概念</h2><h3 id="WEB开发的相关知识"><a href="#WEB开发的相关知识" class="headerlink" title="WEB开发的相关知识"></a>WEB开发的相关知识</h3><p>　　<code>web（World Wide Web）</code>即全球广域网，也称为万维网，它是一种基于<code>超文本</code>和<code>HTTP</code>的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在<code>Internet</code>上的一种网络服务，为浏览者在<code>Interne</code>t上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将<code>Internet</code>上的信息节点组织成一个互为关联的网状结构。</p>
+<p>这里有几个名词解释：</p>
+<pre><code>-  网络：由若干终端和连接这些终端的链路组成；
+-  互联网(internet;internetwork;internection network)：是网络的网络，是所有类型网络的母集。
+-  因特网(Internet)：世界上最大的互联网网络。即因特网概念从属于互联网概念。习惯上，大家把连接在因特网上的计算机都成为主机。
+-  万维网(WWW;world wide web;Web)：并非某种特殊的计算机网络，万维网是一个大规模的、联机式的信息贮藏所，英文简称web。万维网用链接的方法能非常方便地从因特网上的一个站点访问另一个站点（超链技术），具有提供分布式服务的特点。万维网是一个分布式的超媒体系统，是超文本系统的扩充。万维网基于B/S架构工作。
+-  URL：万维网使用统一资源定位符（Uniform Resource Locator）来标志万维网上的各种文档，并使每个文档在整个因特网的范围内具有唯一的标识符URL。
+-  HTTP：为解决“用什么样的协议来实现整个因特网上的万维网文档”这一难题，就要使万维网客户程序（以浏览器为主，但不限于浏览器）与万维网服务器程序之间的交互遵守严格的协议，这就是超文本传送协议（HyperText Transfer Protocol）。HTTP是处于应用层的协议，使用TCP传输层协议进行可靠的传送。因此，需要特别提醒的是，万维网是基于因特网的一种广泛因特网应用系统，且万维网采用的是HTTP（端口：80）/HTTPS（端口：43）的传输协议，但因特网还有其他的网络应用系统（如：FTP、SMTP等等）。
+-  HTML：为了解决“怎样使不同作者创作的不同风格的万维网文档，都能在因特网上的各种主机上显示出来，同时使用户清楚地知道在什么地方存在着链接”这一问题，万维网使用超文本标记语言（HyperText Markup Language），使得万维网页面的设计者可以很方便地用链接从页面的某处链接到因特网的任何一个万维网页面，并且能够在自己的主机品目上将这些页面显示出来。HTML与txt一样，仅仅是是一种文档，不同之处在于，这种文档专供于浏览器上为浏览器用户提供统一的界面呈现的统一规约。且具备结构化的特征，这是txt所不具备的强制规定。
+</code></pre><p>　　也就是说，web是一种通过HTTP（超文本传输协议）传输数据，并对HTML（超文本标记语言）展示的思想，它涵盖了一系列的技术，其中数据提供者为服务器，数据展示者为浏览器（不限于浏览器，其他可以解析并展示HTML也可以），数据传输协议为HTTP。</p>
+<ul>
+<li>数据提供者：我们现在常称为服务端，主要用来保存信息，和提供数据</li>
+<li>数据传输：HTTP协议</li>
+<li>数据展示：我们常称为前端，主要将后端提供数据展示给用户，并进行交互。</li>
+</ul>
+<h3 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h3><p>　　web的发展历程主要经历了两个大的阶段，静态和动态。</p>
+<pre><code>- 静态：这个时候的web页面都是由web服务器提供，我们写一个html文档放在web服务器上，就可以被用户访问到。
+- 动态：动态的web技术是因为服务满足用户的交互要求发展出来的，将web服务器和应用程序结合起来，可以将页面或数据在后台进行处理，比如存储数据到数据库。
+</code></pre><p>　　服务器也存在两种，一种是web服务器，一种是应用服务器，这两种服务器的区别可以参考一个知乎回答：</p>
+<pre><code>　　严格意义上Web服务器只负责处理HTTP协议，只能发送静态页面的内容。而JSP，ASP，PHP等动态内容需要通过CGI、FastCGI、ISAPI等接口交给其他程序去处理。这个其他程序就是应用服务器。比如Web服务器包括Nginx，Apache，IIS等。而应用服务器包括WebLogic，JBoss，tomcat等。应用服务器一般也支持HTTP协议，因此界限没这么清晰。但是应用服务器的HTTP协议部分仅仅是支持，一般不会做特别优化，所以很少有见Tomcat直接暴露给外面，而是和Nginx、Apache等配合，只让Tomcat处理JSP和Servlet部分。
+</code></pre><p><strong>本节参考阅读：</strong></p>
+<ul>
+<li><a href="https://www.zhihu.com/question/19860216#answer-390026" target="_blank" rel="noopener">知乎 - web是什么</a></li>
+<li><a href="https://baike.baidu.com/item/Web/150564" target="_blank" rel="noopener">百度百科</a></li>
+<li><a href="https://www.zhihu.com/question/20096067/answer/27794712" target="_blank" rel="noopener">知乎-匿名用户</a></li>
+<li><a href="https://mp.weixin.qq.com/s?src=11&amp;timestamp=1538462898&amp;ver=1157&amp;signature=y45We8hQFVRG7po4lCd08DXPUUjsLJO9xPIIW05LsBC1u0cheP1rVkG8kpiKx5GpoZvXLcCVx8Df-Swjnuu9ftZPEucra6I9y3Zwfe8uIRf1bIhtpXcvl34aF766rVqx&amp;new=1" target="_blank" rel="noopener">一文看懂web服务器、应用服务器、web容器、反向代理服务器区别与联系</a></li>
+</ul>
+<h2 id="第二节-后端：服务提供者"><a href="#第二节-后端：服务提供者" class="headerlink" title="第二节 后端：服务提供者"></a>第二节 后端：服务提供者</h2><p>　　服务提供者我们一般称为服务器，当前大多数应用都是动态应用，所有经常将web服务器和应用服务器同时部署，Web服务器处理静态页面部分，应用服务器处理动态部分。<br>　　应用服务器可以运行通过各种语言开发出来的应用程序，对数据请求者提供数据服务，web服务器一般是通用的，而应用服务器是专用的，如tomcat只能处理java应用程序。
+　　</p>
+<h3 id="常见的后端服务器"><a href="#常见的后端服务器" class="headerlink" title="常见的后端服务器"></a>常见的后端服务器</h3><pre><code>- IIS  
+- Kangle
+- WebSphere
+- WebLogic
+- Apache
+- Tomcat
+- Nginx
+</code></pre><h3 id="应用服务器的工作流程"><a href="#应用服务器的工作流程" class="headerlink" title="应用服务器的工作流程"></a>应用服务器的工作流程</h3><p>　　一般情况下Web应用程序容器是以下构成体系：</p>
+<center><br><img src="/img/javaweb/javaweb_base01.png" alt=""><br></center>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="faraway 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="faraway 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/08/第五章-多线程/" rel="next" title="第五章 多线程">
+                <i class="fa fa-chevron-left"></i> 第五章 多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzg0Ni8xMDM5OQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="faraway" />
+            
+              <p class="site-author-name" itemprop="name">faraway</p>
+              <p class="site-description motion-element" itemprop="description">生活不只有眼前的苟且，还有诗和远方</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-基本概念"><span class="nav-number">1.</span> <span class="nav-text">第一节 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB开发的相关知识"><span class="nav-number">1.1.</span> <span class="nav-text">WEB开发的相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发展历程"><span class="nav-number">1.2.</span> <span class="nav-text">发展历程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二节-后端：服务提供者"><span class="nav-number">2.</span> <span class="nav-text">第二节 后端：服务提供者</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的后端服务器"><span class="nav-number">2.1.</span> <span class="nav-text">常见的后端服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用服务器的工作流程"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务器的工作流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">faraway</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.3"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
