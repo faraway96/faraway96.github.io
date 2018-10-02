@@ -1940,7 +1940,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4585d0;
+  background: #49965d;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2806,4 +2806,16 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+article code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 45px 0 15px;
 }
