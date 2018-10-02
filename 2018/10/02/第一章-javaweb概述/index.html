@@ -111,7 +111,8 @@
 <meta property="og:description" content="在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。 第一节 基本概念WEB开发的相关知识　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/javaweb/javaweb_base01.png">
-<meta property="og:updated_time" content="2018-10-02T07:49:02.329Z">
+<meta property="og:image" content="http://yoursite.com/img/javaweb/javaweb_base02.png">
+<meta property="og:updated_time" content="2018-10-02T10:02:30.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一章 JavaWeb概述">
 <meta name="twitter:description" content="在做web开发之前我们首先要了解web的基本知识，才能做到知其然，且知其所以然。本章会列出web开发的一些基本知识。 第一节 基本概念WEB开发的相关知识　　web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了">
@@ -413,7 +414,49 @@
 <center><br><img src="/img/javaweb/javaweb_base01.png" alt=""><br></center>
 
 <p>详细的应用服务器内容会新开一篇讲述<a href="https://asd.com" target="_blank" rel="noopener">《服务篇 第一章 tomcat》</a>。</p>
-<h2 id="第三节-传输协议"><a href="#第三节-传输协议" class="headerlink" title="第三节 传输协议"></a>第三节 传输协议</h2>
+<h2 id="第三节-传输协议"><a href="#第三节-传输协议" class="headerlink" title="第三节 传输协议"></a>第三节 传输协议</h2><p>　　数据提供者和数据展示之间存在一个数据交互的过程，web应用的交互协议使用的http和https，下面详细讲述一下http协议和https协议的内容</p>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>　　<code>HTTP</code>(超文本传输协议)是一个应用层协议，建立在<code>TCP</code>传输层协议上面，由请求和响应构成，是一个标准的客户端服务器模型。<code>HTTP</code>是一个无状态的协议。</p>
+<h4 id="HTTP协议工作流程"><a href="#HTTP协议工作流程" class="headerlink" title="HTTP协议工作流程"></a>HTTP协议工作流程</h4><pre><code>1. 首先客户机与服务器需要建立连接(TCP三次握手)。只要单击某个超级链接，HTTP的工作就开始了
+2. 建立连接后，客户机发送一个请求给服务器，请求方式的格式为：统一资源标识符（URL）、协议版本号，后边是MIME信息包括请求修饰符、客户机信息和可能的内容。
+3. 服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息包括服务器信息、实体信息和可能的内容。
+4. 客户端接收服务器所返回的信息通过浏览器显示在用户的显示屏上，然后客户机与服务器断开连接(TCP四次挥手)。
+</code></pre><h4 id="请求报文头"><a href="#请求报文头" class="headerlink" title="请求报文头"></a>请求报文头</h4><pre><code>- Accept：浏览器可接受的MIME类型。
+- Accept-Charset：浏览器可接受的字符集。
+- Accept-Encoding：浏览器能够进行解码的数据编码方式，比如gzip。Servlet能够向支持gzip的浏览器返回经gzip编码的HTML页面。许多情形下这可以减少5到10倍的下载时间。
+- Accept-Language：浏览器所希望的语言种类，当服务器能够提供一种以上的语言版本时要用到。
+- Authorization：授权信息，通常出现在对服务器发送的WWW-Authenticate头的应答中。
+- Connection：表示是否需要持久连接。如果Servlet看到这里的值为“Keep-Alive”，或者看到请求使用的是HTTP 1.1（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点，当页面包含多个元素时（例如Applet，图片），显著地减少下载所需要的时间。要实现这一点，Servlet需要在应答中发送一个Content-Length头，最简单的实现方法是：先把内容写入ByteArrayOutputStream，然后在正式写出内容之前计算它的大小。
+- Content-Length：表示请求消息正文的长度。
+- Cookie：这是最重要的请求头信息之一。
+- From：请求发送者的email地址，由一些特殊的Web客户程序使用，浏览器不会用到它。
+- Host：初始URL中的主机和端口。
+- If-Modified-Since：只有当所请求的内容在指定的日期之后又经过修改才返回它，否则返回304“Not Modified”应答。
+- Pragma：指定“no-cache”值表示服务器必须返回一个刷新后的文档，即使它是代理服务器而且已经有了页面的本地拷贝。
+- Referer：包含一个URL，用户从该URL代表的页面出发访问当前请求的页面。
+- User-Agent：浏览器类型，如果Servlet返回的内容与浏览器类型有关则该值非常有用；
+- UA-Pixels，UA-Color，UA-OS，UA-CPU：由某些版本的IE浏览器所发送的非标准的请求头，表示屏幕大小、颜色深度、操作系统和CPU类型。
+</code></pre><h4 id="响应报文头"><a href="#响应报文头" class="headerlink" title="响应报文头"></a>响应报文头</h4><pre><code>- Allow：服务器支持哪些请求方法（如GET、POST等）。
+- Content-Encoding：文档的编码（Encode）方法。只有在解码之后才可以得到Content-Type头指定的内容类型。利用gzip压缩文档能够显著地减少HTML文档的下载时间。Java的GZIPOutputStream可以很方便地进行gzip压缩，但只有Unix上的Netscape和Windows上的IE 4、IE 5才支持它。因此，Servlet应该通过查看Accept-Encoding头（即request.getHeader(&quot;Accept-Encoding&quot;)）检查浏览器是否支持gzip，为支持gzip的浏览器返回经gzip压缩的HTML页面，为其他浏览器返回普通页面。
+- Content-Length：表示内容长度。只有当浏览器使用持久HTTP连接时才需要这个数据。如果你想要利用持久连接的优势，可以把输出文档写入ByteArrayOutputStram，完成后查看其大小，然后把该值放入Content-Length头，最后通过byteArrayStream.writeTo(response.getOutputStream()发送内容。
+- Content-Type： 表示后面的文档属于什么MIME类型。Servlet默认为text/plain，但通常需要显式地指定为text/html。由于经常要设置Content-Type，因此HttpServletResponse提供了一个专用的方法setContentTyep。 可在web.xml文件中配置扩展名和MIME类型的对应关系。
+- Date：当前的GMT时间。你可以用setDateHeader来设置这个头以避免转换时间格式的麻烦。
+- Expires：指明应该在什么时候认为文档已经过期，从而不再缓存它。
+- Last-Modified：文档的最后改动时间。客户可以通过If-Modified-Since请求头提供一个日期，该请求将被视为一个条件GET，只有改动时间迟于指定时间的文档才会返回，否则返回一个304（Not Modified）状态。Last-Modified也可用setDateHeader方法来设置。
+- Location：表示客户应当到哪里去提取文档。Location通常不是直接设置的，而是通过HttpServletResponse的sendRedirect方法，该方法同时设置状态代码为302。
+- Refresh：表示浏览器应该在多少时间之后刷新文档，以秒计。除了刷新当前文档之外，你还可以通过setHeader(&quot;Refresh&quot;, &quot;5; URL=http://host/path&quot;)让浏览器读取指定的页面。注意这种功能通常是通过设置HTML页面HEAD区的&lt;META HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;5;URL=http://host/path&quot;&gt;实现，这是因为，自动刷新或重定向对于那些不能使用CGI或Servlet的HTML编写者十分重要。但是，对于Servlet来说，直接设置Refresh头更加方便。注意Refresh的意义是“N秒之后刷新本页面或访问指定页面”，而不是“每隔N秒刷新本页面或访问指定页面”。因此，连续刷新要求每次都发送一个Refresh头，而发送204状态代码则可以阻止浏览器继续刷新，不管是使用Refresh头还是&lt;META HTTP-EQUIV=&quot;Refresh&quot; ...&gt;。注意Refresh头不属于HTTP 1.1正式规范的一部分，而是一个扩展，但Netscape和IE都支持它。
+</code></pre><h3 id="HTTPS协议"><a href="#HTTPS协议" class="headerlink" title="HTTPS协议"></a>HTTPS协议</h3><p>　　简单来说<code>HTTPS</code>就是<code>HTTP</code>的安全版，HTTPS在HTTP协议下加入了SSL层，因此HTTPS的安全基础就是SSL。</p>
+<h4 id="HTTPS加密算法"><a href="#HTTPS加密算法" class="headerlink" title="HTTPS加密算法"></a>HTTPS加密算法</h4><p>　　有两种基本的加解密算法类型：</p>
+<pre><code>1．对称加密：密钥只有一个，加密解密为同一个密码，且加解密速度快，典型的对称加密算法有DES、AES等。
+2．非对称加密：密钥成对出现（且根据公钥无法推知私钥，根据私钥也无法推知公钥），加密解密使用不同密钥（公钥加密需要私钥解密，私钥加密需要公钥解密），相对对称加密速度较慢，典型的非对称加密算法有RSA、DSA等。
+</code></pre><h4 id="HTTPS的通信过程"><a href="#HTTPS的通信过程" class="headerlink" title="HTTPS的通信过程"></a>HTTPS的通信过程</h4><p>　　通信过程见下图</p>
+<center><br><img src="/img/javaweb/javaweb_base02.png" alt=""><br></center>
+
+<p><strong>本节参考阅读：</strong></p>
+<ul>
+<li><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">深入理解HTTP协议</a></li>
+</ul>
+<h3 id="第四节-前端：数据展示"><a href="#第四节-前端：数据展示" class="headerlink" title="第四节 前端：数据展示"></a>第四节 前端：数据展示</h3><p>　　数据展示主要使用HTML。</p>
+
       
     </div>
     
@@ -612,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-基本概念"><span class="nav-number">1.</span> <span class="nav-text">第一节 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB开发的相关知识"><span class="nav-number">1.1.</span> <span class="nav-text">WEB开发的相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发展历程"><span class="nav-number">1.2.</span> <span class="nav-text">发展历程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二节-后端：服务提供者"><span class="nav-number">2.</span> <span class="nav-text">第二节 后端：服务提供者</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的后端服务器"><span class="nav-number">2.1.</span> <span class="nav-text">常见的后端服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用服务器的工作流程"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务器的工作流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三节-传输协议"><span class="nav-number">3.</span> <span class="nav-text">第三节 传输协议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-基本概念"><span class="nav-number">1.</span> <span class="nav-text">第一节 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB开发的相关知识"><span class="nav-number">1.1.</span> <span class="nav-text">WEB开发的相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发展历程"><span class="nav-number">1.2.</span> <span class="nav-text">发展历程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二节-后端：服务提供者"><span class="nav-number">2.</span> <span class="nav-text">第二节 后端：服务提供者</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的后端服务器"><span class="nav-number">2.1.</span> <span class="nav-text">常见的后端服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用服务器的工作流程"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务器的工作流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三节-传输协议"><span class="nav-number">3.</span> <span class="nav-text">第三节 传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP协议工作流程"><span class="nav-number">3.1.1.</span> <span class="nav-text">HTTP协议工作流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求报文头"><span class="nav-number">3.1.2.</span> <span class="nav-text">请求报文头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应报文头"><span class="nav-number">3.1.3.</span> <span class="nav-text">响应报文头</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS协议"><span class="nav-number">3.2.</span> <span class="nav-text">HTTPS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS加密算法"><span class="nav-number">3.2.1.</span> <span class="nav-text">HTTPS加密算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS的通信过程"><span class="nav-number">3.2.2.</span> <span class="nav-text">HTTPS的通信过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四节-前端：数据展示"><span class="nav-number">3.3.</span> <span class="nav-text">第四节 前端：数据展示</span></a></li></ol></li></ol></div>
             
 
           </div>
